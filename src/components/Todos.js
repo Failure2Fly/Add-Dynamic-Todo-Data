@@ -1,11 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 // Load components
 import Layout from './Layout'
 import AddTodo from './AddTodo'
 import Todo from './Todo'
-import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 
 class Todos extends React.Component {
 
@@ -21,9 +21,9 @@ class Todos extends React.Component {
         this.toggleComplete = this.toggleComplete.bind(this)
 
         // Initial state
-        this.state = {
-            todos: []
-        }
+        // this.state = {
+        //     todos: []
+        // }
     }
 
     // React lifecycle methods
@@ -36,6 +36,7 @@ class Todos extends React.Component {
     getTodos() {
         fetch('/api/v1/todos')
         .then(response => response.json())
+        //Put the data in redux, must have a type: 'TODOS_UPDATE' and a body property with our todos data in it
         .then(todos => this.props.dispatch({type: 'TODOS_UPDATE', body: todos}))
     }
 
